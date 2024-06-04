@@ -4,14 +4,14 @@
 // Change here to customise config
 
 // Name of the Github Repo, it's also teh baseUrl
-const workshopName = 'docusaurus-workshop';
+const workshopName = 'ai-agents-lab';
 // Change this if hosting outside mongodb-developer
 const organizationName = "mongodb-developer";
 
 // Main page config
-const title = "Docusaurus Meta Workshop";
-const tagLine = "A Workshop written in Docusaurus to teach you how to write Workshops using docusaurus";
-const startButtonTitle = "Enter Inception";
+const title = "Get started with building AI agents";
+const tagLine = "";
+const startButtonTitle = "Start Lab";
 const favicon = "img/favicon.svg"
 
 // Main Page Features
@@ -41,8 +41,8 @@ const featureList = [
 
 // UTM stuff
 
-const utmAdvocateName = `diego.freniche`;
-const utmWorkshopName = 'docusaurus_workshop'
+const utmAdvocateName = `apoorva.joshi`;
+const utmWorkshopName = 'ai_agents_workshop'
 
 const utmParams = `utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=${utmWorkshopName}&utm_term=${utmAdvocateName}`;
 
@@ -54,8 +54,8 @@ const footerLinks = [
     href: `https://www.mongodb.com/try?${utmParams}`,
   },
   {
-    label: "Forums",
-    href: `https://www.mongodb.com/community/forums/${utmParams}`,
+    label: "GenAI Forums",
+    href: `https://www.mongodb.com/community/forums/c/generative-ai/162/${utmParams}`,
   },
   {
     label: "Developer Center",
@@ -134,14 +134,6 @@ const config = {
           autoCollapseCategories: true,
           hideable: true,
         },
-      },
-      announcementBar: {
-        id: "feedback_form",
-        content:
-          'We are looking to revamp our docs, please fill <a target="_blank" rel="noopener noreferrer" href="#">this survey</a>',
-        backgroundColor: "#fafbfc",
-        textColor: "#091E42",
-        isCloseable: true,
       },
       navbar: {
         title: `${title}`,
