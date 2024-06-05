@@ -1,0 +1,22 @@
+# 👐 Instantiate chat completion LLM
+
+Let's instantiate the chat completion LLM to use as the "brain" of our agent and for any of the tools if required.
+
+We will use Fireworks AI's free AND open-source **firefunction-v1** model via the **ChatFireworks** API in LangChain.
+
+Fill in `<CODE_BLOCK_7>` under "Step 4: Instantiate Chat Completion LLM" and run the cell containing the code block.
+
+👐 **CODE_BLOCK_7**: Create an instance of `ChatFireworks` with the model `firefunction-v1`, temperature set to `0.0` and max tokens set to `1024`
+
+📚 https://python.langchain.com/v0.1/docs/integrations/chat/fireworks/
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+ChatFireworks(
+    model="accounts/fireworks/models/firefunction-v1", temperature=0.0, max_tokens=1024
+)
+```
+</div>
+</details>

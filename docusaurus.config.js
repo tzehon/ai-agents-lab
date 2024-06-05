@@ -9,7 +9,7 @@ const workshopName = 'ai-agents-lab';
 const organizationName = "mongodb-developer";
 
 // Main page config
-const title = "Get started with building AI agents";
+const title = "Building Agents with a Fully Open AI Stack";
 const tagLine = "";
 const startButtonTitle = "Start Lab";
 const favicon = "img/favicon.svg"
@@ -42,7 +42,7 @@ const featureList = [
 // UTM stuff
 
 const utmAdvocateName = `apoorva.joshi`;
-const utmWorkshopName = 'ai_agents_workshop'
+const utmWorkshopName = 'ai_agents_lab'
 
 const utmParams = `utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=${utmWorkshopName}&utm_term=${utmAdvocateName}`;
 

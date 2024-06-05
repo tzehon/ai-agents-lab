@@ -1,0 +1,8 @@
+{
+  "label": "Create Agent Tools",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Create tools for the AI research agent."
+  }
+}
