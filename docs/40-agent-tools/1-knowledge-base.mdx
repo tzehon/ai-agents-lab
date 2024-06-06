@@ -1,22 +1,12 @@
 # 👐 Create the agent's knowledge base
 
-One of the tools that the AI research agent has access to is a question-answering tool for the agent to answer questions based on information in its knowledge base. But first, we need to create the knowledge base.
+One of the tools that the AI research agent has access to is a question-answering tool that retrieves information from a knowledge base (MongoDB collection) and uses it to answer questions. But first, we need to create the knowledge base.
 
-## Download the dataset from Hugging Face
+Fill in any `<CODE_BLOCK>`s and run the cells under the **Step 3: Create a knowledge base** section in the notebook to download a dataset of Arxiv papers from [Hugging Face](https://huggingface.co/datasets/mongodb-eai/arxiv-embeddings) and ingest it into a MongoDB collection which will serve as our agent's knowledge base.
 
-We will use a dataset consisting of a subset of Arxiv papers, to build our knowledge base. The data is available on [Hugging Face](https://huggingface.co/datasets/mongodb-eai/arxiv-embeddings).
+The answers for code blocks in this section are as follows:
 
-👐 Run the first **TWO** cells under "Step 3: Ingest Data into MongoDB Atlas" to download the dataset from Hugging Face and preview it.
-
-Notice that the dataset already has an `embedding` column, which consists of embeddings of the paper abstracts.
-
-## Ingest data into MongoDB Atlas
-
-Let's use the **PyMongo** Python library to ingest data into MongoDB Atlas. Fill in `<CODE_BLOCK_3>` to `<CODE_BLOCK_6>` and run the cells containing these code blocks.
-
-👐 **CODE_BLOCK_3**: Initialize a MongoDB Python client
-
-📚 https://pymongo.readthedocs.io/en/stable/api/pymongo/mongo_client.html
+**CODE_BLOCK_3**
 
 <details>
 <summary>Answer</summary>
@@ -27,9 +17,7 @@ MongoClient(MONGODB_URI)
 </div>
 </details>
 
-👐 **CODE_BLOCK_4**: Connect to the `COLLECTION_NAME` collection using the MongoDB client
-
-📚 https://pymongo.readthedocs.io/en/stable/tutorial.html#getting-a-collection
+**CODE_BLOCK_4**
 
 <details>
 <summary>Answer</summary>
@@ -40,9 +28,7 @@ client[DB_NAME][COLLECTION_NAME]
 </div>
 </details>
 
-👐 **CODE_BLOCK_5**: Bulk delete all existing records from the `collection` collection -- should be a one-liner
-
-📚 https://pymongo.readthedocs.io/en/stable/api/pymongo/collection.html
+**CODE_BLOCK_5**
 
 <details>
 <summary>Answer</summary>
@@ -53,9 +39,7 @@ collection.delete_many({})
 </div>
 </details>
 
-👐 **CODE_BLOCK_6**: Bulk insert `records` into the `collection` collection -- should be a one-liner
-
-📚 https://pymongo.readthedocs.io/en/stable/api/pymongo/collection.html
+**CODE_BLOCK_6**
 
 <details>
 <summary>Answer</summary>

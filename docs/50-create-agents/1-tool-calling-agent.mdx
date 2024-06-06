@@ -1,18 +1,16 @@
 # 👐 Create a basic tool-calling agent
 
-Let's start by creating a basic tool-calling agent.
+Let's start by creating a basic tool-calling agent using the `create_tool_calling_agent` method in LangChain.
 
-First off, create a simple system prompt to define the agent's behavior.
-
-Fill in `<CODE_BLOCK_15>` under "Step 6: Create a Basic Tool-calling Agent" and run the cell containing thes code block.
-
-👐 **CODE_BLOCK_15**: Write a simple system prompt for the agent.
+Fill in any `<CODE_BLOCK>`s and run the cells under the **Step 7: Create a basic tool-calling agent** section in the notebook to create a basic tool-calling agent.
 
 :::tip
-Use the `render_text_description` method to include the list of tools the agent can access, in the prompt.
+Skip over the **🦸 CoT prompting** section for now. Come back to it if time permits.
 :::
 
-📚 https://api.python.langchain.com/en/latest/tools/langchain.tools.render.render_text_description.html
+The answers for code blocks in this section are as follows:
+
+**CODE_BLOCK_15**
 
 <details>
 <summary>Answer</summary>
@@ -28,19 +26,7 @@ Otherwise, you have access to the following tools:
 </div>
 </details>
 
-Now, create the agent.
-
-Fill in `<CODE_BLOCK_16>` under "Step 6: Create a Basic Tool-calling Agent" and run the cell containing thes code block.
-
-👐 **CODE_BLOCK_16**: Refer to the `Create Agent` and `Run Agent` sections in the docs below to craft a prompt template, initialize a tool-calling agent, and an agent executor
-
-:::tip
-- Use the `system_message` defined previously, in the prompt template
-- Do not include chat history in the prompt for now
-- Name the agent executor object `agent_executor` to maintain continuity in the notebook
-:::
-
-📚 https://python.langchain.com/v0.1/docs/modules/agents/agent_types/tool_calling/
+**CODE_BLOCK_16**
 
 <details>
 <summary>Answer</summary>
@@ -62,9 +48,3 @@ agent_executor = AgentExecutor(
 ```
 </div>
 </details>
-
-👐 Run the **LAST** cell under "Step 6: Create a Basic Tool-calling Agent" to test that the agent works as expected.
-
-:::caution
-If the agent runs into parsing errors, refer to the docs [here](https://python.langchain.com/v0.1/docs/modules/agents/how_to/handle_parsing_errors/) to add appropriate arguments to the agent executor and try again.
-:::

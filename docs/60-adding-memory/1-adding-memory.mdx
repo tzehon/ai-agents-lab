@@ -1,0 +1,63 @@
+# 👐 Add memory to agents using MongoDB
+
+The final step in this lab is to add conversational message history as a form of memory for the agent. 
+
+Message history in this case will be stored in and retrieved from a MongoDB collection.
+
+Fill in any `<CODE_BLOCK>`s and run the cells under the **Step 9: Add memory to agents using MongoDB** section in the notebook to add memory to the basic tool calling agent we created previously.
+
+The answers for code blocks in this section are as follows:
+
+**CODE_BLOCK_19**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+return MongoDBChatMessageHistory(
+    MONGODB_URI, session_id, database_name=DB_NAME, collection_name="history"
+)
+```
+</div>
+</details>
+
+**CODE_BLOCK_20**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+MessagesPlaceholder("chat_history")
+```
+</div>
+</details>
+
+**CODE_BLOCK_21**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+RunnableWithMessageHistory(
+    agent_executor,
+    get_message_history,
+    input_messages_key="input",
+    history_messages_key="chat_history",
+)
+```
+</div>
+</details>
+
+**CODE_BLOCK_22**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+agent_with_chat_history.invoke(
+    {"input": "What is the title of the first paper you found?"},
+    config={"configurable": {"session_id": "my-session"}},
+)
+```
+</div>
+</details>

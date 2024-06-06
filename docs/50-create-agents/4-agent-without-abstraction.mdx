@@ -1,0 +1,41 @@
+# 🦸 Create a custom agent without using abstractions
+
+The `create_tool_calling_agent` method in LangChain makes it easy to create tool-calling agents by abstracting away the invidual steps involved in creating the agent.
+
+As a challenge, try creating a tool-calling agent without using the `create_tool_calling_method.
+
+To do this, fill in any `<CODE_BLOCK>`s and run the cells under the **🦸 Create a custom agent without using abstractions** section in the notebook.
+
+The answers for code blocks in this section are as follows:
+
+**CODE_BLOCK_18**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", system_message),
+        ("human", "{input}"),
+        MessagesPlaceholder("agent_scratchpad"),
+    ]
+)
+
+llm_with_tools = llm.bind_tools(tools)
+
+agent = (
+    RunnablePassthrough.assign(
+        agent_scratchpad=lambda x: format_to_tool_messages(x["intermediate_steps"])
+    )
+    | prompt
+    | llm_with_tools
+    | ToolsAgentOutputParser()
+)
+
+agent_executor = AgentExecutor(
+    agent=agent, tools=tools, verbose=True, handle_parsing_errors=True
+)
+```
+</div>
+</details>

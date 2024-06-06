@@ -1,0 +1,35 @@
+# 👐 Create a vector search index
+
+To retrieve documents from the knowledge base using vector search, you must configure a vector search index on the knowledge base collection.
+
+To do this, open the **Database Deployments** page in the Atlas UI and select **Create Index** in the lower right corner under Atlas Search.
+
+<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/40-agent-tools/1-create-index.png" alt="Select create index" />
+
+Click the **Create Search Index** button.
+
+<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/40-agent-tools/2-create-search-index.png" alt="Create search index" />
+
+Click **JSON Editor** under Atlas Vector Search to create your index
+
+<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/40-agent-tools/3-json-editor.png" alt="The 'Create Index' page with the 'JSON Editor' tab highlighted" />
+
+
+Select the `mongodb_agents_lab` database and the `knowledge` collection, change the index name to `vector_index`, and add the following index definition in the JSON editor:
+
+```python
+{
+  "fields": [
+    {
+      "type": "vector",
+      "path": "embedding",
+      "numDimensions": 1024,
+      "similarity": "cosine"
+    }
+  ]
+}
+```
+
+:::info
+The number of dimensions in the index definition is 1024 since the Arxiv dataset we used to create the knowledge base uses Mixedbread AI's open-source [mxbai-embed-large-v1](https://huggingface.co/mixedbread-ai/mxbai-embed-large-v1) model for embeddings.
+:::

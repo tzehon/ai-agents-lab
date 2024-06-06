@@ -1,0 +1,25 @@
+# 👐 Create a ReAct agent
+
+Now let's try out an agent that uses ReAct prompting using the `create_react_agent` method in LangChain.
+
+Fill in any `<CODE_BLOCK>`s and run the cells under the **Step 8: Create a ReAct agent** section in the notebook to create a ReAct agent.
+
+The answers for code blocks in this section are as follows:
+
+**CODE_BLOCK_17**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+agent = create_react_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(
+    agent=agent,
+    tools=tools,
+    verbose=True,
+    handle_parsing_errors="Check your output. Make an observation in order to determine whether or not you have the final answer.\
+        If you do, use the exact characters `Final Answer` and exit.",
+)
+```
+</div>
+</details>

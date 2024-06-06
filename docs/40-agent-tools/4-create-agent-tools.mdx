@@ -1,0 +1,128 @@
+import Screenshot from "@site/src/components/Screenshot";
+
+# 👐 Create agent tools
+
+The easiest way to define custom tools for agents in LangChain is using the `@tool` decorator. The decorator makes tools out of functions by using the function name as the tool name by default, and the function's docstring as the tool's description.
+
+We want the AI research agent to have access to the following tools:
+
+* `get_paper_metadata_arxiv`: Fetches a list of research papers from Arxiv, given a topic
+
+* `get_paper_summary_from_arxiv`: Fetches the summary for a single research paper, given a paper ID
+
+* `answer_questions_about_topics`: Answer questions about a given topic based on information in the agent's knowledge base
+
+Fill in any `<CODE_BLOCK>`s and run the cells under the **Step 6: Create agent tools** section in the notebook to create tools for the agent to use.
+
+:::tip
+The `get_paper_metadata_arxiv` tool has been defined for you. Use this as inspiration to create the other two tools. The tool names and docstrings have been written out for you. All you have to do is code up the tool logic.
+
+Similarly, use the sample test for the `get_paper_metadata_arxiv` tool to test out the other tools.
+:::
+
+The answers for code blocks in this section are as follows:
+
+**CODE_BLOCK_8**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+doc = ArxivLoader(query=id, load_max_docs=1).get_summaries_as_docs()
+if len(doc) == 0:
+    return "No summary found for this paper."
+return doc[0].page_content
+```
+</div>
+</details>
+
+**CODE_BLOCK_9**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+MongoDBAtlasVectorSearch.from_connection_string(
+    connection_string=MONGODB_URI,
+    namespace=DB_NAME + "." + COLLECTION_NAME,
+    embedding=embedding_model,
+    index_name=ATLAS_VECTOR_SEARCH_INDEX_NAME,
+    text_key="abstract",
+)
+```
+</div>
+</details>
+
+**CODE_BLOCK_10**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+vector_store.as_retriever(search_type="similarity", search_kwargs={"k": 5})
+```
+</div>
+</details>
+
+**CODE_BLOCK_11**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+retrieve = {
+    "context": retriever
+    | (lambda docs: "\n\n".join([d.page_content for d in docs])),
+    "question": RunnablePassthrough(),
+}
+# Defining the chat prompt
+template = """Answer the question based only on the following context. If no context is provided, say I do not know: \
+{context}
+
+Question: {question}
+"""
+prompt = ChatPromptTemplate.from_template(template)
+# Parse output as a string
+parse_output = StrOutputParser()
+# Retrieval chain
+retrieval_chain = retrieve | prompt | llm | parse_output
+
+answer = retrieval_chain.invoke(query)
+
+return answer
+```
+</div>
+</details>
+
+**CODE_BLOCK_12**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+get_paper_summary_from_arxiv.invoke("1808.09236")
+```
+</div>
+</details>
+
+**CODE_BLOCK_13**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+get_paper_summary_from_arxiv.invoke("808.09236")
+```
+</div>
+</details>
+
+**CODE_BLOCK_14**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+answer_questions_about_topics.invoke("What are partial cubes?")
+```
+</div>
+</details>
