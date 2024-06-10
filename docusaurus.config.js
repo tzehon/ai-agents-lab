@@ -62,8 +62,8 @@ const footerLinks = [
     href: `https://www.mongodb.com/developer/${utmParams}`,
   },
   {
-    label: "MongoDB University",
-    href: `https://learn.mongodb.com/${utmParams}`,
+    label: "GenAI Code Examples",
+    href: `https://github.com/mongodb-developer/GenAI-Showcase`,
   },
   {
     href: `https://github.com/${organizationName}/${workshopName}`,
