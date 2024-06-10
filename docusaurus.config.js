@@ -54,16 +54,16 @@ const footerLinks = [
     href: `https://www.mongodb.com/try?${utmParams}`,
   },
   {
-    label: "GenAI Forums",
-    href: `https://www.mongodb.com/community/forums/c/generative-ai/162/${utmParams}`,
-  },
-  {
     label: "Developer Center",
     href: `https://www.mongodb.com/developer/${utmParams}`,
   },
   {
     label: "GenAI Code Examples",
     href: `https://github.com/mongodb-developer/GenAI-Showcase`,
+  },
+  {
+    label: "GenAI Forums",
+    href: `https://www.mongodb.com/community/forums/c/generative-ai/162/${utmParams}`,
   },
   {
     href: `https://github.com/${organizationName}/${workshopName}`,
