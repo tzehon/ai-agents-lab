@@ -1,0 +1,37 @@
+# 📘 Tools, libraries, and concepts
+
+Here is a quick overview of tools, libraries and concepts that you will come across in this section of the lab:
+
+## [create_tool_calling_agent](https://api.python.langchain.com/en/latest/agents/langchain.agents.tool_calling_agent.base.create_tool_calling_agent.html)
+
+LangChain abstraction to create a basic tool-calling agent. It is essentially a sequence of Runnables that represents an agent:
+
+```
+(
+   RunnablePassthrough.assign(
+       agent_scratchpad=lambda x: format_to_tool_messages(x["intermediate_steps"])
+   )
+   | prompt
+   | llm_with_tools
+   | ToolsAgentOutputParser()
+)
+```
+
+## [create_react_agent](https://api.python.langchain.com/en/latest/agents/langchain.agents.react.agent.create_react_agent.html)
+
+LangChain abstraction to create a ReAct agent. It is essentially a sequence of Runnables that represents a ReAct agent:
+
+```
+(
+   RunnablePassthrough.assign(
+       agent_scratchpad=lambda x: format_to_tool_messages(x["intermediate_steps"])
+   )
+   | react_prompt
+   | llm_with_stop
+   | ReActSingleInputOutputParser()
+)
+```
+
+## [AgentExecutor](https://api.python.langchain.com/en/latest/agents/langchain.agents.agent.AgentExecutor.html)
+
+AgentExecutor is the runtime for an agent in LangChain. It is responsible for calling the agent, executing the actions it chooses, passing action outputs back to the agent, and repeating actions as needed.
