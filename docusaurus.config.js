@@ -9,7 +9,7 @@ const workshopName = 'ai-agents-lab';
 const organizationName = "mongodb-developer";
 
 // Main page config
-const title = "Building Agents with a Fully Open AI Stack";
+const title = "The A to Z of Building AI Agents";
 const tagLine = "";
 const startButtonTitle = "Start Lab";
 const favicon = "img/favicon.svg"
