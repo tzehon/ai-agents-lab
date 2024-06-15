@@ -78,7 +78,7 @@ retrieve = {
     "question": RunnablePassthrough(),
 }
 # Defining the chat prompt
-template = """Answer the question based only on the following context. If no context is provided, say I do not know: \
+template = """Answer the question based only on the following context. IF NO CONTEXT IS PROVIDED, SAY I DO NOT KNOW: \
 {context}
 
 Question: {question}
@@ -124,7 +124,7 @@ get_paper_summary_from_arxiv.invoke("808.09236")
 <summary>Answer</summary>
 <div>
 ```python
-answer_questions_about_topics.invoke("What are partial cubes?")
+answer_questions_about_topics.invoke("Partial cubes")
 ```
 </div>
 </details>
@@ -135,7 +135,7 @@ answer_questions_about_topics.invoke("What are partial cubes?")
 <summary>Answer</summary>
 <div>
 ```python
-answer_questions_about_topics.invoke("What is Tree of Thought prompting?")
+answer_questions_about_topics.invoke("Tree of Thoughts")
 ```
 </div>
 </details>
