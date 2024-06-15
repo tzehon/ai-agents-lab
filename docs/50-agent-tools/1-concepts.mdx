@@ -28,6 +28,6 @@ Standalone `langchain-{provider}` packages for improved versioning, dependency m
 
 LCEL provides a declarative way to chain together prompts, data processing steps, calls to LLMs, and tools. Each unit in a chain is called a Runnable and can be invoked, streamed and transformed on its own.
 
-## [Retriever](https://python.langchain.com/v0.1/docs/modules/data_connection/retrievers/)
+## [RunnableLambda](https://api.python.langchain.com/en/latest/runnables/langchain_core.runnables.base.RunnableLambda.html)
 
-In LangChain, a retriever is an interface that returns documents given an unstructured query. It is a Runnable that can be used on its own or as a part of a chain.
+RunnableLambda converts any arbitrary Python function into a LangChain Runnable.

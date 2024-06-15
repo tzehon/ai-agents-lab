@@ -1,0 +1,22 @@
+# 🦸 Use web search for information not in the knowledge base
+
+The knowledge base we created has limited information. Use web search to broaden the scope of the `answer_questions_about_topics` tool.
+
+Fill in any `<CODE_BLOCK>`s and run the cells under the **🦸Use web search to get information** section in the notebook to use DuckDuckGo search if the information required to answer a particular question is not present in the knowledge base.
+
+**CODE_BLOCK_16**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+context = vector_store.similarity_search_with_score(query=query)
+context = [doc for doc, score in context if score > 0.8]
+if len(context) == 0:
+    search = DuckDuckGoSearchRun()
+    result = search.run(query)
+    context = [Document(page_content=result)]
+return context
+```
+</div>
+</details>
