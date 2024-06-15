@@ -59,7 +59,9 @@ MongoDBAtlasVectorSearch.from_connection_string(
 <summary>Answer</summary>
 <div>
 ```python
-vector_store.as_retriever(search_type="similarity", search_kwargs={"k": 5})
+context = vector_store.similarity_search_with_score(query=query)
+context = [doc for doc, score in context if score > 0.8]
+return context
 ```
 </div>
 </details>
@@ -71,7 +73,7 @@ vector_store.as_retriever(search_type="similarity", search_kwargs={"k": 5})
 <div>
 ```python
 retrieve = {
-    "context": retriever
+    "context": RunnableLambda(get_context)
     | (lambda docs: "\n\n".join([d.page_content for d in docs])),
     "question": RunnablePassthrough(),
 }
@@ -123,6 +125,17 @@ get_paper_summary_from_arxiv.invoke("808.09236")
 <div>
 ```python
 answer_questions_about_topics.invoke("What are partial cubes?")
+```
+</div>
+</details>
+
+**CODE_BLOCK_15**
+
+<details>
+<summary>Answer</summary>
+<div>
+```python
+answer_questions_about_topics.invoke("What is Tree of Thought prompting?")
 ```
 </div>
 </details>
