@@ -125,7 +125,7 @@ const config = {
       }),
     ],
   ],
-  plugins: [require.resolve("@cmfcmf/docusaurus-search-local")],
+  plugins: [require.resolve("docusaurus-lunr-search")],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -145,9 +145,7 @@ const config = {
           width: "135px",
           height: "100%",
         },
-        items: [
-         
-        ],
+        items: [],
       },
       footer: {
         style: "dark",
