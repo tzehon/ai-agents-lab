@@ -2,11 +2,11 @@
 
 The easiest way to define custom tools for agents in LangChain is using the `@tool` decorator. The decorator makes tools out of functions by using the function name as the tool name by default, and the function's docstring as the tool's description.
 
-We want the MongoDB learning assistant to have access to the following tools:
+We want the documentation agent to have access to the following tools:
 
 * `get_information_for_question_answering`: Uses vector search to retrieve information to answer questions
 
-* `get_article_content_for_summarization`: Gets the content of articles for summarization
+* `get_page_content_for_summarization`: Gets the content of specific document pages for summarization
 
 Fill in any `<CODE_BLOCK_N>` placeholders and run the cells under the **Step 4: Create agent tools** section in the notebook to create tools for the agent to use.
 

@@ -2,14 +2,28 @@
 
 Here is a quick overview of concepts that you will come across in this section of the lab:
 
-In this lab, we will use LangGraph by LangChain to orchestrate the MongoDB learning assistant. LangGraph allows you to model agentic systems as graphs. Graphs in LangGraph have the following core features:
 
-## State
+## Creating agents using LangGraph
+
+In this lab, we will use LangGraph by LangChain to orchestrate a technical documentation agent. LangGraph allows you to model agentic systems as graphs. Graphs in LangGraph have the following core features:
+
+### State
 Each graph in has a state which is a shared data structure that all the nodes can access and make updates to. You can define custom attributes within the state depending on what parameters you want to track across the nodes of the graph.
 
-## Nodes
+### Nodes
 Nodes in LangGraph are Python functions that encode the logic of your agents. They receive the current state of the graph as input, perform some computation and return an updated state.
 
-## Edges
+### Edges
 Edges in LangGraph are Python functions that determine which graph node to execute next based on the current state of the graph. Edges can be conditional or fixed.
 
+## Using different LLM providers with LangChain
+
+LangChain supports different LLM providers for you to build AI applications with. Unless you are using open-source models, you typically need to obtain API keys to use the chat completion APIs offered by different LLM providers. 
+
+For this lab, we have created a serverless function that creates LLM objects for Amazon, Google and Microsoft models that you can use with LangChain and LangGraph without having to obtain API keys. However, if you would like to do this on your own, here are some resources:
+
+* [Using Amazon Bedrock LLMs with LangChain](https://python.langchain.com/docs/integrations/llms/bedrock/)
+
+* [Using Google LLMs with LangChain](https://python.langchain.com/docs/integrations/chat/google_generative_ai/)
+
+* [Using Microsoft LLMs with langChain](https://python.langchain.com/docs/integrations/chat/azure_chat_openai/)
