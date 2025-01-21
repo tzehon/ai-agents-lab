@@ -1,5 +1,11 @@
 # 👐 Import data
 
+:::caution
+If you are doing this lab as part of a MongoDB GenAI Developer Day, at this point you should already have the data required for this lab in your MongoDB cluster, so you can skip this step.
+
+If you haven't imported the data yet, follow the steps below to do so.
+:::
+
 The documentation agent has two tools- a vector search tool to retrieve information from documentation to answer questions, and another tool to get the content from specific documentation pages for summarization.
 
 Let's import the data required by these tools into two MongoDB collections. This is as simple as making a `POST` request to a serverless function that we have created for you.
