@@ -3,6 +3,6 @@
   "position": 8,
   "link": {
     "type": "generated-index",
-    "description": "Add memory to the agent."
+    "description": "Add short-term memory to the agent"
   }
 }
