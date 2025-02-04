@@ -23,7 +23,7 @@ The easiest way to define tools in LangChain is using the `@tool` decorator. The
 
 An example of a tool in LangChain is as follows:
 
-```
+```python
 @tool("search-tool", return_direct=True)
 def search(query: str) -> str:
     """Look up things online."""
@@ -31,7 +31,7 @@ def search(query: str) -> str:
 ```
 An example of a tool call is as follows:
 
-```
+```json
 {
   "name": "search-tool",
   "args": {
