@@ -5,4 +5,17 @@
 Checkpoints in LangGraph are a snapshot of the graph state. This is how AI applications built using LangGraph persist short-term and long-term memory.
 
 ## Thread IDs
+
 Thread IDs are unique IDs assigned to memory checkpoints in LangGraph, allowing it to distinguish between conversation threads, facilitate human-in-the loop workflows and allow users to review and debug graph executions.
+
+## Persisting checkpoints in MongoDB
+
+In this lab, you will persist the short-term memory of the agent in MongoDB. To do this, compile the agent's graph with the MongoDB checkpointer available in our LangGraph integration as follows:
+
+```
+from langgraph.checkpoint.mongodb import MongoDBSaver
+checkpointer = MongoDBSaver(mongodb_client)
+app = graph.compile(checkpointer=checkpointer)
+```
+
+Refer to [this](https://langchain-ai.github.io/langgraph/how-tos/persistence_mongodb/) documentation to learn more about the MongoDB checkpointer for LangGraph.
