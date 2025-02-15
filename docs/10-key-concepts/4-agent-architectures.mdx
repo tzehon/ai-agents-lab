@@ -1,0 +1,32 @@
+# 🦹 Agent architectures
+
+AI agents can consist of a single LLM as the decision maker or multiple LLMs (or same LLM, different prompts) working together to solve complex problems.
+
+Let's look at a few different agent architectures:
+
+## Tool-calling
+
+This is the architecture most agents start with. It consists of a single LLM that has access to several tools to perform a range of tasks.
+
+![](/img/screenshots/10-key-concepts/agent-workflow.png)
+
+If you start with tool-calling agents, but upon thorough evaluation find that you need a more sophisticated architecture, only then consider multi-agent architectures. Bear in mind that fully autonomous multi-agent workflows mean higher costs, latency, and a system that is hard to debug, so use them with caution. 
+
+## Supervisor
+
+In this architecture, a single agent (supervisor) interfaces with a group of agents to determine the next course of action.
+
+![](/img/screenshots/10-key-concepts/supervisor.png)
+
+## Network
+
+In this architecture, each agent can communicate with every other agent and decide which one to call next or end the execution.
+
+![](/img/screenshots/10-key-concepts/network.png)
+
+
+## Custom
+
+In this setup, you can decide which agents can interact with each other and how the control flows between them.
+
+![](/img/screenshots/10-key-concepts/custom.png)
