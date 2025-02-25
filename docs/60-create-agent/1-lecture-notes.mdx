@@ -2,16 +2,18 @@
 
 ## Creating agents using LangGraph
 
-In this lab, we will use LangGraph by LangChain to orchestrate an AI agen for a technical documentation website. LangGraph allows you to model agentic systems as graphs. Graphs in LangGraph have the following core features:
-
-### State
-Each graph in has a state which is a shared data structure that all the nodes can access and make updates to. You can define custom attributes within the state depending on what parameters you want to track across the nodes of the graph.
+In this lab, we will use LangGraph by LangChain to orchestrate an AI agent for a technical documentation website. LangGraph allows you to model agentic systems as graphs. Graphs in LangGraph have the following core features:
 
 ### Nodes
 Nodes in LangGraph are Python functions that encode the logic of your agents. They receive the current state of the graph as input, perform some computation and return an updated state.
 
 ### Edges
-Edges in LangGraph are Python functions that determine which graph node to execute next based on the current state of the graph. Edges can be conditional or fixed.
+Edges in LangGraph determine which graph node to execute next based on the current state of the graph. Edges can be conditional, fixed and even result in loops.
+
+### State
+Each graph has a state which is a shared data structure that all the nodes can access and make updates to. You can define custom attributes within the state depending on what parameters you want to track across the nodes of the graph.
+
+To learn more about these concepts, refer to the [LangGraph docs](https://langchain-ai.github.io/langgraph/concepts/low_level/).
 
 ## Using different LLM providers with LangChain
 
