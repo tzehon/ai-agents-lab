@@ -1,3 +1,5 @@
+[![.github/workflows/deploy.yml](https://github.com/mongodb-developer/ai-agents-lab/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/mongodb-developer/ai-agents-lab/actions/workflows/deploy.yml)
+
 # Developer Days AI Agents Lab
 
 This is the AI Agents Lab used during MongoDB Developer Days that covers building AI Agents using a fully open AI stack.
