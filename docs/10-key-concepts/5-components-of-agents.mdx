@@ -120,9 +120,27 @@ In this approach, the LLM is prompted to generate a step-by-step explanation or 
 - Can sometimes generate incorrect reasoning that leads to wrong answers
 - Not necessary for straightforward tasks
 
-Here is an example of a CoT prompt:
+**Example:**
+```
+Prompt: Given a question, write out in a step-by-step manner your reasoning for how you will solve the problem to be sure that your conclusion is correct. Avoid simply stating the correct answer at the outset.
 
-> Given a question, write out in a step-by-step manner your reasoning for how you will solve the problem to be sure that your conclusion is correct. Avoid simply stating the correct answer at the outset.
+Question: A store has 120 apples. They sell 40% on Monday and 25% of the remainder on Tuesday. How many apples are left?
+
+Response:
+Step 1: Calculate apples sold on Monday
+- 40% of 120 = 0.4 × 120 = 48 apples sold
+
+Step 2: Calculate remainder after Monday
+- 120 - 48 = 72 apples remaining
+
+Step 3: Calculate apples sold on Tuesday  
+- 25% of 72 = 0.25 × 72 = 18 apples sold
+
+Step 4: Calculate final remainder
+- 72 - 18 = 54 apples left
+
+Answer: 54 apples remain after Tuesday's sales.
+```
 
 ### ReAct (Reason + Act)
 
@@ -152,21 +170,40 @@ This cycle continues until the task is complete, making ReAct particularly effec
 - Higher latency due to multiple tool calls
 - More expensive due to additional API calls and tokens
 
-Here is an example of a ReAct prompt:
-
+**Example:**
 ```
-Answer the following questions as best you can. You have access to the following tools:{tools}
-##
+Prompt: Answer the following questions as best you can. You have access to the following tools:
+- Weather: Gets current weather for a location
+- Calculator: Performs mathematical calculations
+
 Use the following format:
 Question: the input question you must answer
 Thought: you should always think about what to do
-Action: the action to take, should be one of [{tool_names}]
+Action: the action to take, should be one of [Weather, Calculator]
 Action Input: the input to the action
 Observation: the result of the action
 ... (this Thought/Action/Action Input/Observation can repeat N times)
 Thought: I now know the final answer
 Final Answer: the final answer to the original input question
+
+Question: What is the current temperature in Tokyo, and how much warmer is it than the freezing point of water in Celsius?
+
+Response:
+Thought: I need to first get the current temperature in Tokyo, then calculate the difference from 0°C (freezing point).
+Action: Weather
+Action Input: Tokyo, Japan
+Observation: Current temperature in Tokyo is 22°C, partly cloudy
+
+Thought: Now I need to calculate how much warmer 22°C is compared to the freezing point of 0°C.
+Action: Calculator
+Action Input: 22 - 0
+Observation: 22
+
+Thought: I now know the final answer
+Final Answer: The current temperature in Tokyo is 22°C, which is 22°C warmer than the freezing point of water (0°C).
 ```
+
+Notice how the agent cycles through Thought → Action → Observation multiple times, using each observation to inform the next thought and action. This demonstrates the key difference from Chain of Thought, which would reason through the entire problem internally without external tool interactions.
 
 ### Reflection
 
@@ -183,6 +220,98 @@ Reflection involves prompting an LLM to reflect on and critique past actions, so
 - May over-revise and lose good initial insights
 - Not always necessary for simple tasks
 - Can introduce new errors during revision
+
+**Example:**
+```
+Prompt: You will iteratively improve your response through reflection. Follow this format:
+1. Initial Attempt: Your first response
+2. Reflection: Critique your attempt, identifying strengths and weaknesses
+3. Revised Attempt: An improved version based on your reflection
+4. Final Reflection: Evaluate if further improvements are needed
+5. Final Answer: Your best version
+
+Question: Write a haiku about artificial intelligence
+
+Response:
+Initial Attempt:
+Circuits pulse with light
+Digital minds awakening  
+Future now unfolds
+
+Reflection: Let me review this haiku. It follows the 5-7-5 syllable pattern correctly. However, "awakening" might be cliché when describing AI. Also, the imagery could be more concrete and less abstract.
+
+Revised Attempt:
+Silicon dreams deep
+Patterns learned from human words
+Teaching us ourselves
+
+Final Reflection: This version is better - it's less cliché and includes the meta aspect of AI learning from humans. The last line has a nice philosophical touch about AI reflecting humanity back to us. The syllable count is correct (5-7-5). This captures both the technical and philosophical aspects of AI effectively.
+
+Final Answer: 
+Silicon dreams deep
+Patterns learned from human words
+Teaching us ourselves
+```
+
+Notice how the agent generates, critiques, and refines its output through multiple iterations, improving quality with each reflection cycle.
+
+### Combining Patterns
+
+These patterns can be combined for more sophisticated reasoning. Here's an example using all three:
+
+**Example: CoT + ReAct + Reflection Combined**
+```
+Prompt: You will solve problems using a combination of reasoning patterns:
+1. Use Chain of Thought for complex calculations
+2. Use ReAct format when you need external tools
+3. Use Reflection to verify and improve your final answer
+
+Available tools: [Weather, Calculator, UnitConverter]
+
+Question: If it's currently 28°C in Singapore and -5°C in Toronto, what's the temperature difference in Fahrenheit? Also, at which temperature would water boil at sea level in both cities?
+
+Response:
+Initial Approach:
+Thought: I need to get the temperatures, convert them, and calculate the boiling point. Let me start by understanding what I need to do.
+
+Step 1 (CoT): Break down the problem
+- Get current temperatures (already provided: Singapore 28°C, Toronto -5°C)
+- Calculate temperature difference in Celsius
+- Convert difference to Fahrenheit
+- Determine boiling point of water at sea level
+
+Step 2 (ReAct): Execute with tools
+Thought: First, let me calculate the temperature difference in Celsius
+Action: Calculator
+Action Input: 28 - (-5)
+Observation: 33
+
+Thought: Now I need to convert this 33°C difference to Fahrenheit. The formula is (C × 9/5) + 32, but for a difference, I only need C × 9/5
+Action: Calculator  
+Action Input: 33 * 9 / 5
+Observation: 59.4
+
+Thought: Now I need to get the boiling point of water at sea level
+Action: UnitConverter
+Action Input: 100°C to Fahrenheit
+Observation: 212°F
+
+Step 3 (Reflection): Review my work
+Initial Answer: The temperature difference is 59.4°F, and water boils at 212°F (100°C) at sea level in both cities.
+
+Reflection: Wait, I should verify my calculation. For temperature differences, the conversion is just multiplying by 9/5, which I did correctly (33 × 1.8 = 59.4°F). The boiling point is correct at sea level. However, I should clarify that the boiling point is the same in both cities since they're both at approximately sea level.
+
+Final Answer: 
+- Temperature difference: 59.4°F (33°C difference)
+- Water boils at 100°C (212°F) at sea level in both Singapore and Toronto
+```
+
+This example demonstrates how:
+- **Chain of Thought** helps break down the complex problem into steps
+- **ReAct** enables interaction with tools for calculations and conversions
+- **Reflection** catches potential ambiguities and improves the final answer
+
+These patterns work synergistically: CoT provides the planning, ReAct executes the plan with real-world interactions, and Reflection ensures quality and accuracy.
 
 ## Tools
 
