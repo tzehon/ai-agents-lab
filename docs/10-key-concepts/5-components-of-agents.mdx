@@ -10,19 +10,147 @@ Perception, in the context of AI agents, is the mechanism by which the agent gat
 
 AI agents use user prompts, self-prompting and feedback loops to break down complex tasks, reason through their execution plan and refine it as needed.
 
-Some common design patterns for planning and reasoning in AI agents are as follows:
+Before diving into specific reasoning patterns, it's important to understand prompting strategies:
 
-### Chain of Thought (Cot) Prompting
+### Prompting Strategies
 
-In this approach, the LLM is prompted to generate a step-by-step explanation or reasoning process for a given task or problem.
+#### Zero-Shot Prompting
+The model is given a task without any examples, relying entirely on its pre-trained knowledge.
 
-Here is an example of a zero-shot CoT prompt:
+**Example:**
+```
+Classify the sentiment of this text as positive, negative, or neutral:
+"The product exceeded my expectations."
+```
+
+**Pros:**
+- No need to craft examples
+- Fast and straightforward
+- Works well for simple, common tasks
+- Minimal prompt engineering required
+
+**Cons:**
+- May struggle with complex or domain-specific tasks
+- Less consistent output format
+- No guidance on desired style or approach
+- Performance varies significantly by task
+
+#### One-Shot Prompting
+The model is provided with exactly one example before performing the task.
+
+**Example:**
+```
+Classify sentiment as positive, negative, or neutral.
+
+Example:
+Text: "The service was terrible and slow."
+Sentiment: negative
+
+Now classify:
+Text: "The product exceeded my expectations."
+Sentiment:
+```
+
+**Pros:**
+- Provides clear format guidance
+- Better consistency than zero-shot
+- Helps establish the desired output style
+- Still relatively concise
+
+**Cons:**
+- Single example may not cover edge cases
+- Can bias the model toward the example's specific pattern
+- May not generalize well to diverse inputs
+- Limited demonstration of task complexity
+
+#### Few-Shot / Many-Shot / Multi-Shot Prompting
+The model is given multiple examples (typically 3-10 for few-shot, more for many-shot) to learn the pattern.
+
+**Example:**
+```
+Classify sentiment as positive, negative, or neutral.
+
+Example 1:
+Text: "The service was terrible and slow."
+Sentiment: negative
+
+Example 2:
+Text: "Amazing product, highly recommend!"
+Sentiment: positive
+
+Example 3:
+Text: "The item works as described."
+Sentiment: neutral
+
+Now classify:
+Text: "The product exceeded my expectations."
+Sentiment:
+```
+
+**Pros:**
+- Best performance on complex tasks
+- Can demonstrate edge cases and nuances
+- Establishes clear patterns and consistency
+- Reduces ambiguity in task interpretation
+
+**Cons:**
+- Requires careful example selection
+- Uses more tokens (higher cost)
+- Risk of overfitting to examples
+- Can hit context length limits with many examples
+- Time-consuming to create good examples
+
+### Common Design Patterns
+
+With these prompting strategies in mind, here are common design patterns for planning and reasoning in AI agents:
+
+### Chain of Thought (CoT) Prompting
+
+In this approach, the LLM is prompted to generate a step-by-step explanation or reasoning process for a given task or problem. CoT prompting helps the model break down complex problems into manageable steps and show its reasoning process transparently.
+
+**Pros:**
+- Improves accuracy on complex reasoning tasks
+- Makes the model's thinking process transparent and auditable
+- Helps catch logical errors in the reasoning chain
+- Works well for mathematical, logical, and multi-step problems
+
+**Cons:**
+- Increases token usage and response time
+- May overthink simple problems
+- Can sometimes generate incorrect reasoning that leads to wrong answers
+- Not necessary for straightforward tasks
+
+Here is an example of a CoT prompt:
 
 > Given a question, write out in a step-by-step manner your reasoning for how you will solve the problem to be sure that your conclusion is correct. Avoid simply stating the correct answer at the outset.
 
 ### ReAct (Reason + Act)
 
-In this approach, the LLM is prompted to generate reasoning traces and task-specific actions in an interleaved manner, allowing for greater synergy between the two: reasoning traces help the model induce, track, and update action plans, while actions allow it to interface with external sources or tools, to gather additional information.
+While Chain of Thought focuses purely on internal reasoning, ReAct combines reasoning with action-taking. The key difference is that ReAct:
+
+1. **Interleaves reasoning with actions**: The agent thinks, acts, observes the results, then thinks again based on new information
+2. **Grounds reasoning in real-world feedback**: Unlike pure CoT which reasons in isolation, ReAct agents can validate their reasoning by interacting with tools and observing outcomes
+3. **Enables dynamic adaptation**: The agent can adjust its approach based on actual results rather than theoretical reasoning alone
+
+In ReAct, the LLM alternates between:
+- **Thought**: Internal reasoning about what to do next
+- **Action**: Executing a specific tool or API call
+- **Observation**: Processing the results of that action
+
+This cycle continues until the task is complete, making ReAct particularly effective for tasks that require gathering information from external sources or verifying hypotheses through interaction.
+
+**Pros:**
+- Can access real-time, up-to-date information through tools
+- Self-corrects based on actual feedback
+- More reliable for tasks requiring external data
+- Reduces hallucination by grounding responses in tool outputs
+
+**Cons:**
+- More complex to implement than pure CoT
+- Requires careful tool design and error handling
+- Can get stuck in loops if not properly constrained
+- Higher latency due to multiple tool calls
+- More expensive due to additional API calls and tokens
 
 Here is an example of a ReAct prompt:
 
@@ -43,6 +171,18 @@ Final Answer: the final answer to the original input question
 ### Reflection
 
 Reflection involves prompting an LLM to reflect on and critique past actions, sometimes incorporating additional external information such as tool observations. The generation-reflection loop is run several times before returning the final response to the user. Reflection trades a bit of extra compute for a shot at better output quality.
+
+**Pros:**
+- Improves output quality through iterative refinement
+- Can catch and correct mistakes before final output
+- Particularly effective for creative and analytical tasks
+- Reduces errors through self-critique
+
+**Cons:**
+- Significantly increases computational cost and latency
+- May over-revise and lose good initial insights
+- Not always necessary for simple tasks
+- Can introduce new errors during revision
 
 ## Tools
 

@@ -2,8 +2,29 @@
 
 AI agents are best suited for complex, multi-step tasks that require integration of multiple capabilities, such as question-answering, analysis, task execution etc. to arrive at the final answer or outcome. An active area of research is to have AI agents learn from their past interactions to build personalized and adaptive experiences.
 
+## Key indicators that you need an AI agent
 
-Here are some examples of tasks/questions that **DO NOT** require an AI agent:
+Consider using AI agents when your task involves:
+
+1. **Multiple sequential steps** - Tasks that require breaking down into subtasks and executing them in order
+2. **Dynamic decision-making** - Situations where the next action depends on the results of previous actions
+3. **Tool integration** - Need to interact with APIs, databases, or external systems
+4. **Iterative refinement** - Tasks that benefit from trying, evaluating, and adjusting approaches
+5. **Context accumulation** - Building understanding through multiple interactions or data sources
+6. **Personalization over time** - Learning from user interactions to provide tailored experiences
+
+## When NOT to use AI agents
+
+AI agents add complexity and latency. Avoid them for:
+
+- **Simple Q&A** - Questions answerable with existing LLM knowledge
+- **Static retrieval** - Tasks solvable with basic RAG
+- **Single-step operations** - Direct API calls or database queries
+- **Real-time requirements** - Tasks needing sub-second responses
+
+## Examples
+
+### Tasks that **DO NOT** require an AI agent:
 
 > Who was the first president of the United States?
 
@@ -13,7 +34,7 @@ The information required to answer this question is very likely present in the p
 
 The information required to answer this question is most likely not present in the parametric knowledge of available LLMs. However, this question can easily be answered using Retrieval Augmented Generation (RAG) using a knowledge base consisting of your company's data. This still does not require an agent.
 
-Here are some use cases for AI agents:
+### Tasks that **DO** require an AI agent:
 
 > How has the trend in the average daily calorie intake among adults changed over the last decade in the United States, and what impact might this have on obesity rates? Additionally, can you provide a graphical representation of the trend in obesity rates over this period?
 
