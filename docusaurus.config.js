@@ -6,7 +6,7 @@
 // Name of the Github Repo, it's also teh baseUrl
 const workshopName = 'ai-agents-lab';
 // Change this if hosting outside mongodb-developer
-const organizationName = "mongodb-developer";
+const organizationName = "tzehon";
 
 // Main page config
 const title = "The A to Z of Building AI Agents";
