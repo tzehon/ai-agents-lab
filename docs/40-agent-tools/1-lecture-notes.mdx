@@ -4,7 +4,7 @@
 
 In this lab, we are using a serverless function to import the data required by the agent's tools, into MongoDB. If you want to do this on your own, these datasets are available on Hugging Face:
 
-* [mongodb-docs](https://huggingface.co/datasets/MongoDB/mongodb-docs): Markdown versions of a small subset of MongoDB's technical documentation. This dataset is imported into a collection called `full_docs`. 
+* [mongodb-docs](https://huggingface.co/datasets/MongoDB/mongodb-docs): Markdown versions of a small subset of MongoDB's technical documentation. This dataset is imported into a collection called `full_docs`.
 
 * [mongodb-docs-embedded](https://huggingface.co/datasets/MongoDB/mongodb-docs-embedded): Chunked and embedded versions of the articles in the `mongodb-docs` dataset. This dataset is imported into a collection called `chunked_docs`.
 
@@ -17,9 +17,9 @@ To learn more about chunking and embedding, here are some resources from our Dev
 
 Tool calling, interchangeably called function calling allows an LLM to use external tools such as APIs, databases, specialized machine learning models etc.
 
-In AI agents, an LLM can have access to multiple tools. Given a user query, the LLM decides which tool to invoke and the arguments for the tool call. These arguments are used to execute the tool call and the output is returned back to the LLM to inform its next steps.  
+In AI agents, an LLM can have access to multiple tools. Given a user query, the LLM decides which tool to invoke and the arguments for the tool call. These arguments are used to execute the tool call and the output is returned back to the LLM to inform its next steps.
 
-The easiest way to define tools in LangChain is using the `@tool` decorator. The decorator makes tools out of functions by using the function name as the tool name by default, and the function's docstring as the tool's description. The tool call inturn consists of a tool name, arguments, and an optional identifier. 
+The easiest way to define tools in LangChain is using the `@tool` decorator. The decorator makes tools out of functions by using the function name as the tool name by default, and the function's docstring as the tool's description. The tool call in turn consists of a tool name, arguments, and an optional identifier.
 
 An example of a tool in LangChain is as follows:
 
