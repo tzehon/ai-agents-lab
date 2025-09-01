@@ -11,7 +11,7 @@ const organizationName = "tzehon";
 // Main page config
 const title = "The A to Z of Building AI Agents";
 const tagLine = "";
-const startButtonTitle = "Start Lab";
+const startButtonTitle = "Start Lab (mdb.link/ai-agents-lab)";
 const favicon = "img/favicon.ico"
 
 // Main Page Features
