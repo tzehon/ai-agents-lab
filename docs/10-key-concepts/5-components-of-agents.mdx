@@ -286,14 +286,14 @@ Action: Calculator
 Action Input: 28 - (-5)
 Observation: 33
 
-Thought: Now I need to convert this 33°C difference to Fahrenheit. The formula is (C × 9/5) + 32
-Action: Calculator
-Action Input: (33 * 9 / 5) + 32
-Observation: 91.4
+Thought: Now I need to convert this 33°C difference to Fahrenheit.
+Action: UnitConverter
+Action Input: 33°C to Fahrenheit, (33 * 9 / 5) + 32
+Observation: 91.4°F
 
 Thought: Now I need to get the boiling point of water at sea level
 Action: UnitConverter
-Action Input: 100°C to Fahrenheit
+Action Input: 100°C to Fahrenheit, (100 * 9 / 5) + 32
 Observation: 212°F
 
 Step 3 (Reflection): Review my work
